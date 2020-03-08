@@ -1,0 +1,38 @@
+-- create a DML statement trigger
+
+/*
+
+
+  create [or replace] trigger <trigger_name>
+  [before|after] [insert|update|delete]
+  on [table_name]
+  begin
+    <<trigger_body>>
+  end;
+
+
+*/
+
+
+-- dml statement trigger
+
+create or replace trigger dml_stmt_trig
+before update on employees
+for each row
+begin
+    insert into emp_l_name_upd_log(employee_id, previous_last_name, updated_last_name, updated_by, UPDATE_DATE) 
+    values(:OLD.employee_id, :OLD.last_name, :NEW.last_name, user, sysdate);
+end; 
+
+-- update data into employee table
+
+update employees
+set last_name = 'hassan'
+where employee_id = 100;
+
+-- see the data from emp_l_name_upd_log inserted by the dml_stmt_trig
+
+select * from emp_l_name_upd_log;
+
+
+
