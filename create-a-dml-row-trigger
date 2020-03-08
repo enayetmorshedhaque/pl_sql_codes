@@ -1,0 +1,69 @@
+-- create a DML statement trigger
+
+/*
+
+  create [or replace] trigger <trigger_name>
+  [before|after] [insert|update|delete]
+  of [column_name] on [table_name]
+  [refferencing [new as <new_row_name>] [old as <old_row_name>]]
+  
+  for each row [when [trigger_condition]]
+  begin
+    <<trigger_body>>
+  end;
+
+
+ 
+*/
+
+
+
+-- create two new tables
+
+create table table_1
+(
+    table_id number,
+    table_name varchar2(20)
+);
+
+
+create table table_2
+(
+    table_id number,
+    table_name varchar2(20),
+    data_inserted_by varchar2(10),
+    data_insertion_date date
+);
+
+
+
+-- dml row trigger
+
+create or replace trigger dml_trigger
+after insert on table_1
+for each row
+begin
+    insert into table_2(table_id, table_name, data_inserted_by, data_insertion_date) values(:NEW.table_id, :NEW.table_name, user, sysdate);
+end;
+
+-- insert data into table_1
+
+begin
+    insert into table_1 values(11, 'table 11');
+    insert into table_1 values(12, 'table 12');
+    insert into table_1 values(13, 'table 13');
+    insert into table_1 values(14, 'table 14');
+    insert into table_1 values(15, 'table 15');
+    insert into table_1 values(16, 'table 16');
+    insert into table_1 values(17, 'table 17');
+    insert into table_1 values(18, 'table 18');
+    insert into table_1 values(19, 'table 19');
+    insert into table_1 values(20, 'table 20');
+end;
+
+-- see the data from table_2 inserted by the dml_trigger
+
+select * from table_2;
+
+
+
