@@ -1,0 +1,40 @@
+-- implicit cursor example
+
+/*
+
+
+    declare
+        <variable_for_storing_cursor_data>
+    cursor <cursor_name>
+    is
+        <select_statement>
+    begin
+        open <cursor_name>;
+        loop
+            fetch <cursor_name> into <variable_for_storing_cursor_data>
+            <executable_statement>
+        end loop;
+        close <cursor_name>;
+    end;
+
+
+*/
+
+declare
+    v_c_emp varchar2(100);
+cursor c_emp
+is
+    select first_name || ' ' || last_name
+    from employees;
+begin
+    open c_emp;
+    loop
+        fetch c_emp into v_c_emp;
+        dbms_output.put_line(v_c_emp);
+        if c_emp%notfound then
+            exit;
+        end if;
+    end loop;
+    close c_emp;
+end;
+    
