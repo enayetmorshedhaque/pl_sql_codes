@@ -1,0 +1,49 @@
+-- this program contains the syntax of creating a function
+
+/*
+
+
+create or replace function <function_name>
+return datatype
+is|as
+begin
+  <select_statement>
+exception
+  <exception_list>
+end;
+
+
+*/
+
+-- function program starts here
+
+create or replace function return_st_name(s_id in number)
+return varchar2
+is
+    s_name varchar2(100);
+    error_message varchar2(100) := 'Invalid ID. No student found.';
+begin
+  select st_name
+  into s_name
+  from student_details
+  where st_id = s_id;
+  
+  return s_name;
+  
+  exception
+    when no_data_found then
+      return null || chr(10) || error_message;
+end;
+
+-- main program from where the procedure is begin called
+declare
+  s_id number := 25;
+  s_name varchar2(50);
+  
+begin
+  s_name := return_st_name(s_id);
+  dbms_output.put_line(
+    'Student ID: ' || s_id || chr(10) ||
+    'Student Name: ' || s_name || chr(10)
+  );
+end;
