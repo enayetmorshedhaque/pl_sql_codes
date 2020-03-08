@@ -1,0 +1,15 @@
+-- implicit cursor example
+
+declare
+    emp_search_id number := 100;
+begin
+    update employees
+    set last_name = 'watson'
+    where employee_id = 100;
+    if sql%found then
+        dbms_output.put_line('Employee ID: ' || emp_search_id || ' successfully updated.');
+        dbms_output.put_line(sql%rowcount || ' row effected.');
+    elsif sql%notfound then
+        dbms_output.put_line('Employee Not Found.');
+    end if;
+end;
