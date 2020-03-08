@@ -1,0 +1,26 @@
+-- ddl statement trigger syntax
+
+/*
+
+
+create [or replace] tirgger <trigger_name>
+[before|after] [create|alter|drop]
+on [database|schema]
+begin
+    <trigger_body>
+end
+
+
+*/
+
+create or replace trigger alt_ddl_trig
+before alter
+on schema
+begin
+    raise_application_error(-20505, 'Table structure modification is not allowed.');
+end;
+    
+-- check the upper code
+
+alter table employees
+add (birth_date date);
