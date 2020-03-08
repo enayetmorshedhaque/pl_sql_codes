@@ -1,0 +1,45 @@
+-- this program contains the syntax of creating a procedure
+
+/*
+
+
+create or replace procedure <procedure_name> 
+(parameter_list in/out datatype)
+is|as
+begin
+  <select_statement>
+exception
+  <exception_list>
+end;
+
+
+*/
+
+-- procedure program starts here
+
+create or replace procedure st_id_name
+(s_id in number, s_name out varchar2)
+is
+begin
+  select st_name
+  into s_name
+  from student_details
+  where st_id = s_id;
+  
+  exception
+    when no_data_found then
+      dbms_output.put_line('Invalid Student ID. No record found.');
+end;
+
+-- main program from where the procedure is begin called
+declare
+  s_id number := 10;
+  s_name varchar2(50);
+  
+begin
+  st_id_name(s_id, s_name);
+  dbms_output.put_line(
+    'Student ID: ' || s_id || chr(10) ||
+    'Student Name: ' || s_name || chr(10)
+  );
+end;
