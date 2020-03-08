@@ -1,0 +1,21 @@
+-- main program calling the function
+
+declare
+    a number;
+begin
+    a := return_number();
+    dbms_output.put_line(a);
+end;
+
+-- function declared here
+
+create or replace function return_number
+return number
+is
+    return_max_credit_value number;
+begin
+    select max(CUSTOMERS.CREDIT_LIMIT)
+    into return_max_credit_value
+    from customers;
+    return return_max_credit_value;
+end;
