@@ -1,0 +1,38 @@
+/*
+
+write a trigger which will update a value by using sequence
+
+*/
+
+
+-- CREATE A SEQUENCE
+
+create sequence update_demo_table_final_ start with 12;
+
+-- CREATE A TRIGGER TO CALL THE SEQUENCE
+
+create or replace trigger demo_seq_trig
+before update on demo_table
+for each row
+when (NEW.table_id is null)
+begin
+    :NEW.table_id := update_demo_table_final_.NEXTVAL;
+end;
+
+-- INSERT DATA INTO TABLE WITH A NULL VALUE
+
+/*
+
+write a trigger which will update a value by using sequence
+
+*/
+
+begin
+    insert into demo_table(table_id, table_name) values('', 'table 12'); 
+end;
+
+-- SEE THE UPDATED VALUE UPDATED BY TRIGGER
+
+select * from demo_table;
+
+
