@@ -1,0 +1,23 @@
+-- ddl statement trigger syntax
+
+/*
+
+
+create [or replace] tirgger <trigger_name>
+[after server error | after login | before logoff | after startup | before shutdown]
+on [database|schema]
+begin
+    <trigger_body>
+end
+
+
+*/
+
+create or replace trigger logging_trigg
+after logon on schema
+begin
+    insert into login_log(username, login_date) values(user, sysdate);
+end;
+
+-- show the login data from here
+select * from login_log;
