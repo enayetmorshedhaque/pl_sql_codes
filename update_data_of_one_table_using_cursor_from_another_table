@@ -1,0 +1,28 @@
+/*
+
+write a cursor from a table and usin gthis cursor update data of another table
+
+
+*/
+
+declare
+    v_c_st_details varchar2(100);
+cursor c_st_details
+is
+    select STUDENT_DETAILS.ST_ID
+    from student_details
+    where STUDENT_DETAILS.ST_NAME = 'Karim';
+begin
+    open c_st_details;
+    loop
+        fetch c_st_details into v_c_st_details;
+        if c_st_details%notfound then
+            exit;
+        end if;
+    end loop;
+    update student_marks
+    set STUDENT_MARKS.ST_CGPA = 15.00
+    where STUDENT_MARKS.ST_ID = v_c_st_details;
+    dbms_output.put_line(c_st_details%rowcount || ' row updated');
+    close c_st_details;
+end;
