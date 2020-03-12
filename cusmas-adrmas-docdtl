@@ -1,0 +1,56 @@
+DECLARE
+      IN_CUSCOD     VARCHAR2(10 BYTE) := '00000000';
+      OUT_CUSTYP    VARCHAR2(3 BYTE);
+      OUT_CUSNMF    VARCHAR2(50 BYTE);
+      OUT_CUSNML    VARCHAR2(50 BYTE);
+      OUT_ADDRS1    VARCHAR2(50 BYTE);
+      OUT_ADDRS2    VARCHAR2(50 BYTE);
+      OUT_ADDRS3    VARCHAR2(50 BYTE);
+      OUT_ADDRS4    VARCHAR2(50 BYTE);
+      OUT_CITYCD    VARCHAR2(3 BYTE);
+      OUT_CITYNM    VARCHAR2(20 BYTE);
+      OUT_ADRTYP    VARCHAR2(3 BYTE);
+      OUT_TELENO    VARCHAR2(20 BYTE);
+      OUT_OPRBRA    VARCHAR2(10 BYTE);
+      OUT_TOKEN_NO  VARCHAR2(14 BYTE);
+      OUT_DOCUCD    VARCHAR2(3 BYTE);
+      OUT_DOCUNO    VARCHAR2(20 BYTE);
+      OUT_PISSUE    VARCHAR2(15 BYTE);
+      OUT_ISSDAT    DATE;
+      OUT_EXPDAT    DATE;
+  
+BEGIN
+        DEMO_PRO_CUS(IN_CUSCOD, OUT_CUSTYP, OUT_CUSNMF, OUT_CUSNML, OUT_ADDRS1, OUT_ADDRS2, OUT_ADDRS3, OUT_ADDRS4, 
+                     OUT_CITYCD, OUT_CITYNM, OUT_ADRTYP, OUT_TELENO, OUT_OPRBRA, OUT_TOKEN_NO, 
+                     OUT_DOCUCD, OUT_DOCUNO, OUT_PISSUE, OUT_ISSDAT, OUT_EXPDAT);
+
+--        DBMS_OUTPUT.PUT_LINE( '1. CUSTOMER CODE: ' || IN_CUSCOD || CHR(10) || 
+--                              '2. CUSTOMER TYPE: ' || OUT_CUSTYP || CHR(10) || 
+--                              '3. CUSTOMER FIRST NAME: ' || OUT_CUSNMF || CHR(10) || 
+--                              '4. CUSTOMER LAST NAME: ' || OUT_CUSNML || CHR(10)  ||
+--                              '5. CUSTOMER TELEPHONE NO: ' || OUT_TELENO || CHR(10) || 
+--                              '6. CUSTOMER OPERATOR BRUNCH: ' || OUT_OPRBRA || CHR(10) || 
+--                              '7. CUSTOMER TOKEN NO: ' || OUT_TOKEN_NO || CHR(10) ||
+--                              '8. CUSTOMER DOCUMENT CODE: ' || OUT_DOCUCD || CHR(10) ||
+--                              '9. CUSTOMER DOCUMENT NO: ' || OUT_DOCUNO || CHR(10) ||
+--                              '10. CUSTOMER DOCUMENT ISSUE PLACE: ' || OUT_PISSUE || CHR(10) ||
+--                              '11. CUSTOMER DOCUMENT ISSUE DATE: ' || OUT_ISSDAT || CHR(10) ||
+--                              '12. CUSTOMER ADDRESS 1: ' || OUT_ADDRS1 || CHR(10) ||
+--                              '13. CUSTOMER ADDRESS 2: ' || OUT_ADDRS2 || CHR(10) ||
+--                              '14. CUSTOMER ADDRESS 3: ' || OUT_ADDRS3 || CHR(10) ||
+--                              '15. CUSTOMER ADDRESS 4: ' || OUT_ADDRS4 || CHR(10) ||
+--                              '16. CUSTOMER ADDRESS CITY CODE: ' || OUT_CITYCD || CHR(10) ||
+--                              '17. CUSTOMER ADDRESS CITY NAME: ' || OUT_CITYNM || CHR(10) ||
+--                              '18. CUSTOMER ADDRESS TYPE: ' || OUT_ADRTYP || CHR(10)
+--        );
+        
+        INSERT INTO ENA_CUS_DTL_T_FR_BRNC(CUSCOD, CUSTYP, CUSNMF, CUSNML, ADDRS1, ADDRS2, ADDRS3, ADDRS4, 
+                     CITYCD, CITYNM, ADRTYP, TELENO, OPRBRA, TOKEN_NO, 
+                     DOCUCD, DOCUNO, PISSUE, ISSDAT, EXPDAT)
+        VALUES(IN_CUSCOD, OUT_CUSTYP, OUT_CUSNMF, OUT_CUSNML, OUT_ADDRS1, OUT_ADDRS2, OUT_ADDRS3, OUT_ADDRS4, 
+                     OUT_CITYCD, OUT_CITYNM, OUT_ADRTYP, OUT_TELENO, OUT_OPRBRA, OUT_TOKEN_NO, 
+                     OUT_DOCUCD, OUT_DOCUNO, OUT_PISSUE, OUT_ISSDAT, OUT_EXPDAT);
+
+END;
+    
+    
